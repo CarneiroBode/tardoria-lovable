@@ -137,7 +137,7 @@ export class DemoScene extends Phaser.Scene {
           }
         }
       }
-      this.textures.addSpriteSheet('char_demo', canvas, { frameWidth: 16, frameHeight: 16 });
+      this.textures.addSpriteSheet('char_demo', canvas as any, { frameWidth: 16, frameHeight: 16 });
     }
 
     // Invisible wall texture
