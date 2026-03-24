@@ -140,13 +140,13 @@ const Index = () => {
   useEffect(() => {
     if (!connected || !sceneRef.current) return;
     const interval = setInterval(() => {
-      const s = sceneRef.current;
-      if (s?.playerSprite) {
+      const s = sceneRef.current as any;
+      if (s?.mySprite) {
         emit('move', {
-          x: Math.round(s.playerSprite.x),
-          y: Math.round(s.playerSprite.y),
-          direction: s.currentDir || 'down',
-          moving: s.playerSprite.body?.velocity?.length() > 0,
+          x: Math.round(s.mySprite.x),
+          y: Math.round(s.mySprite.y),
+          direction: s.lastDir || 'down',
+          moving: s.mySprite.body?.velocity?.length() > 0,
         });
       }
     }, 50);
