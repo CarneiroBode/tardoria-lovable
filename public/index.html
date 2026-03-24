@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<title>Tardoria</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:#0d1117;color:#e6edf3;font-family:'Courier New',monospace;overflow:hidden;height:100vh;width:100vw}
+canvas{display:block;image-rendering:pixelated}
+
+/* AUTH */
+#auth{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#0d1117;z-index:200;padding:20px}
+#auth h1{font-size:32px;letter-spacing:8px;color:#e76f51;text-transform:uppercase}
+#auth p{color:#8b949e;font-size:11px;letter-spacing:3px}
+#auth input{width:280px;padding:10px 14px;background:#161b22;border:1px solid #30363d;border-radius:6px;color:#e6edf3;font-family:inherit;font-size:14px}
+#auth input:focus{outline:none;border-color:#e76f51}
+.btn{width:280px;padding:11px;background:#e76f51;color:#fff;border:none;border-radius:6px;font-family:inherit;font-size:13px;letter-spacing:2px;cursor:pointer;text-transform:uppercase}
+.btn:hover{background:#cf5f40}
+.btn-ghost{background:transparent!important;color:#8b949e;font-size:12px;border:none;cursor:pointer;font-family:inherit;width:280px;padding:4px}
+#auth-err{color:#f85149;font-size:12px;min-height:16px;text-align:center}
+
+/* HUD */
+#hud{display:none;position:fixed;top:0;left:0;right:0;height:36px;background:rgba(13,17,23,.95);border-bottom:1px solid #21262d;z-index:100;align-items:center;padding:0 12px;gap:14px;font-size:12px}
+#hud-name{color:#e76f51;font-weight:700;letter-spacing:1px}
+#hud-hp{color:#52b788}
+#hud-gold{color:#f4d03f}
+#hud-room{color:#8b949e;margin-left:auto;font-size:11px}
+#hud-ping{color:#444;font-size:10px}
+
+/* SHOP BADGE */
+#shop-badge{display:none;position:fixed;top:36px;left:0;right:0;padding:6px 12px;background:#7b2d00;border-bottom:1px solid #e76f51;font-size:11px;color:#ffddd2;z-index:99;cursor:pointer;text-align:center}
+
+/* GAME */
+#game{display:none;position:fixed;top:36px;left:0;right:0;bottom:0}
+
+/* JOYSTICK */
+#joystick-zone{display:none;position:fixed;bottom:0;left:0;width:55vw;height:55vw;max-width:260px;max-height:260px;z-index:101;touch-action:none;user-select:none}
+#joystick-base{position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,.07);border:2px solid rgba(231,111,81,.35);transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .15s}
+#joystick-knob{position:absolute;width:44px;height:44px;border-radius:50%;background:rgba(231,111,81,.75);border:2px solid #e76f51;transform:translate(-50%,-50%);pointer-events:none;opacity:0;transition:opacity .15s;box-shadow:0 0 12px rgba(231,111,81,.5)}
+
+/* ACTIONS */
+#actions{display:none;position:fixed;bottom:110px;right:8px;z-index:101;flex-direction:column;gap:6px}
+#actions button{padding:7px 10px;background:rgba(22,27,34,.9);border:1px solid #30363d;border-radius:6px;color:#e6edf3;font-size:11px;cursor:pointer;white-space:nowrap;font-family:inherit}
+#actions button:hover,#actions button:active{border-color:#e76f51;color:#e76f51}
+
+/* CHAT */
+#chat{display:none;position:fixed;bottom:0;left:0;width:min(340px,100vw);background:rgba(13,17,23,.94);border-top:1px solid #21262d;border-right:1px solid #21262d;z-index:101}
+#chat-log{height:90px;overflow-y:auto;padding:6px 8px;font-size:11px;line-height:1.5}
+#chat-log::-webkit-scrollbar{width:3px}
+#chat-log::-webkit-scrollbar-thumb{background:#30363d}
+#chat-row{display:flex;border-top:1px solid #1c2128}
+#chat-input{flex:1;background:transparent;border:none;padding:6px 8px;color:#e6edf3;font-family:inherit;font-size:12px}
+#chat-input:focus{outline:none}
+#chat-send{padding:6px 10px;background:#e76f51;border:none;color:#fff;cursor:pointer;font-size:11px}
+.cm-local{color:#e6edf3}.cm-system{color:#8b949e;font-style:italic}.cm-global{color:#79c0ff}.cm-trade{color:#f4d03f}.cm-loot{color:#52b788}
+
+/* SHOP MODAL */
+#shop-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:150;align-items:center;justify-content:center}
+#shop-box{background:#161b22;border:1px solid #e76f51;border-radius:12px;width:min(360px,95vw);max-height:80vh;overflow-y:auto;padding:20px}
+#shop-box h2{color:#e76f51;font-size:16px;letter-spacing:2px;margin-bottom:4px;text-transform:uppercase}
+#shop-box p{color:#8b949e;font-size:11px;margin-bottom:14px}
+.shop-item{display:flex;align-items:center;gap:10px;padding:10px;background:#0d1117;border-radius:8px;border:1px solid #21262d;margin-bottom:8px;cursor:pointer}
+.shop-item:hover{border-color:#e76f51}
+.shop-item-icon{font-size:24px;width:32px;text-align:center}
+.shop-item-info{flex:1}
+.shop-item-name{font-size:13px;font-weight:700}
+.shop-item-desc{font-size:10px;color:#8b949e}
+.shop-item-price{color:#f4d03f;font-size:12px;font-weight:700}
+.rarity-comum{color:#adb5bd}.rarity-incomum{color:#52b788}.rarity-raro{color:#79c0ff}.rarity-lendario{color:#e76f51}
+#shop-close{width:100%;padding:10px;background:#21262d;border:none;color:#e6edf3;font-family:inherit;border-radius:6px;cursor:pointer;margin-top:8px}
+
+/* TRADE MODAL */
+#trade-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:150;align-items:center;justify-content:center}
+#trade-box{background:#161b22;border:1px solid #79c0ff;border-radius:12px;width:min(320px,95vw);padding:20px;text-align:center}
+#trade-box h3{color:#79c0ff;margin-bottom:12px}
+#trade-box input{width:100%;padding:8px;background:#0d1117;border:1px solid #30363d;border-radius:6px;color:#f4d03f;font-family:inherit;font-size:18px;text-align:center;margin:6px 0}
+.trade-btns{display:flex;gap:8px;margin-top:12px}
+.trade-btns button{flex:1;padding:9px;border:none;border-radius:6px;font-family:inherit;cursor:pointer}
+#trade-accept{background:#52b788;color:#fff}
+#trade-reject{background:#30363d;color:#e6edf3}
+</style>
+</head>
+<body>
+
+<!-- AUTH -->
+<div id="auth">
+  <h1>⚔ Tardoria</h1>
+  <p id="auth-sub">Entre no mundo</p>
+  <input id="a-user"  type="text"     placeholder="Username" autocomplete="off"/>
+  <input id="a-email" type="email"    placeholder="Email" style="display:none"/>
+  <input id="a-pass"  type="password" placeholder="Senha"/>
+  <input id="a-char"  type="text"     placeholder="Nome do Personagem" style="display:none" autocomplete="off"/>
+  <span id="auth-err"></span>
+  <button class="btn" id="auth-submit">Entrar</button>
+  <button class="btn-ghost" id="auth-toggle">Não tem conta? Registrar</button>
+</div>
+
+<!-- HUD -->
+<div id="hud">
+  <span id="hud-name">—</span>
+  <span id="hud-hp">❤ —</span>
+  <span id="hud-gold">💰 —</span>
+  <span id="hud-room">—</span>
+  <span id="hud-ping">0ms</span>
+</div>
+
+<!-- SHOP BADGE -->
+<div id="shop-badge"></div>
+
+<!-- GAME CANVAS -->
+<div id="game"></div>
+
+<!-- JOYSTICK -->
+<div id="joystick-zone">
+  <div id="joystick-base"></div>
+  <div id="joystick-knob"></div>
+</div>
+
+<!-- ACTIONS -->
+<div id="actions">
+  <button id="btn-sleep">😴 Dormir</button>
+  <button id="btn-wake" style="display:none">🌅 Acordar</button>
+  <button id="btn-steal">🗡 Roubar</button>
+  <button id="btn-trade">🤝 Trocar</button>
+</div>
+
+<!-- CHAT -->
+<div id="chat">
+  <div id="chat-log"></div>
+  <div id="chat-row">
+    <input id="chat-input" type="text" placeholder="Mensagem… !g = global" maxlength="200"/>
+    <button id="chat-send">▶</button>
+  </div>
+</div>
+
+<!-- SHOP MODAL -->
+<div id="shop-modal">
+  <div id="shop-box">
+    <h2 id="shop-title">Loja</h2>
+    <p id="shop-sub"></p>
+    <div id="shop-items"></div>
+    <button id="shop-close">Fechar</button>
+  </div>
+</div>
+
+<!-- TRADE MODAL -->
+<div id="trade-modal">
+  <div id="trade-box">
+    <h3 id="trade-title">Proposta de Troca</h3>
+    <p id="trade-msg" style="color:#8b949e;font-size:12px;margin-bottom:8px"></p>
+    <label style="color:#8b949e;font-size:11px">Você oferece (gold):</label>
+    <input id="trade-gold-in" type="number" value="10" min="0"/>
+    <div class="trade-btns">
+      <button id="trade-accept">✅ Aceitar</button>
+      <button id="trade-reject">❌ Recusar</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/game.js"></script>
+</body>
+</html>

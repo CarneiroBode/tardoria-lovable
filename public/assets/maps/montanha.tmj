@@ -1,0 +1,77 @@
+{
+  "compressionlevel": -1,
+  "height": 15,
+  "infinite": false,
+  "layers": [
+    {
+      "id": 1, "name": "Chão", "opacity": 1, "type": "tilelayer", "visible": true,
+      "width": 20, "height": 15, "x": 0, "y": 0,
+      "data": [
+        7,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,9,
+        10,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,12,
+        10,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,12,
+        10,11,11,6,6,11,11,11,11,11,11,11,11,11,6,6,11,11,11,12,
+        10,11,11,6,6,6,11,11,11,11,11,11,11,6,6,6,11,11,11,12,
+        10,11,11,11,6,6,6,11,11,11,11,11,6,6,6,11,11,11,11,12,
+        10,11,11,11,11,6,6,6,11,11,11,6,6,6,11,11,11,11,11,12,
+        10,11,11,11,11,11,6,6,6,11,6,6,6,11,11,11,11,11,11,12,
+        10,11,11,11,11,11,11,6,6,6,6,6,11,11,11,11,11,11,11,12,
+        10,11,11,11,11,11,11,11,6,6,6,11,11,11,11,11,11,11,11,12,
+        10,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,12,
+        10,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,12,
+        10,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,12,
+        10,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,12,
+        13,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,15
+      ]
+    },
+    {
+      "id": 2, "name": "Montanhas", "opacity": 1, "type": "tilelayer", "visible": true,
+      "width": 20, "height": 15, "x": 0, "y": 0,
+      "data": [
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,101,102,0,0,0,0,0,0,0,0,0,101,102,0,0,0,0,
+        0,0,0,103,104,105,0,0,0,0,0,0,0,103,104,105,0,0,0,0,
+        0,0,0,0,106,107,108,0,0,0,0,0,106,107,108,0,0,0,0,0,
+        0,0,0,0,0,109,110,111,0,0,0,109,110,111,0,0,0,0,0,0,
+        0,0,0,0,0,0,112,113,114,0,112,113,114,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,115,116,117,118,115,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+      ]
+    },
+    {
+      "id": 3, "name": "Colisão", "opacity": 0.3, "type": "objectgroup", "visible": true,
+      "x": 0, "y": 0,
+      "objects": [
+        { "id": 1, "name": "montanha_central", "type": "colisao", "x": 96, "y": 48, "width": 128, "height": 144 },
+        { "id": 2, "name": "montanha_esq", "type": "colisao", "x": 48, "y": 48, "width": 80, "height": 96 },
+        { "id": 3, "name": "montanha_dir", "type": "colisao", "x": 192, "y": 48, "width": 80, "height": 96 },
+        { "id": 4, "name": "saida_sul", "type": "transicao", "x": 144, "y": 224, "width": 32, "height": 16, "properties": [{"name": "sala_destino", "type": "int", "value": 5}, {"name": "posicao_entrada", "type": "string", "value": "norte"}] },
+        { "id": 5, "name": "ponto_spawn", "type": "spawn", "x": 152, "y": 200, "width": 16, "height": 16 },
+        { "id": 6, "name": "cofre_secreto", "type": "interacao", "x": 152, "y": 136, "width": 16, "height": 16, "properties": [{"name": "tipo", "type": "string", "value": "cofre"}, {"name": "conteudo", "type": "string", "value": "gema_montanha"}] }
+      ]
+    }
+  ],
+  "nextlayerid": 4, "nextobjectid": 7,
+  "orientation": "orthogonal", "renderorder": "right-down",
+  "tiledversion": "1.10.2", "tileheight": 16,
+  "tilesets": [
+    { "firstgid": 1, "source": "../assets/tilesets/TX_Tileset_Ground.tsx" },
+    { "firstgid": 33, "source": "../assets/tilesets/TX_Tileset_Wall.tsx" },
+    { "firstgid": 100, "source": "../assets/tilesets/TX_Tileset_Mountain.tsx" }
+  ],
+  "tilewidth": 16, "type": "map", "version": "1.10", "width": 20,
+  "properties": [
+    { "name": "sala_id", "type": "int", "value": 0 },
+    { "name": "nome", "type": "string", "value": "Pico das Montanhas" },
+    { "name": "bioma", "type": "string", "value": "montanha" },
+    { "name": "musica", "type": "string", "value": "mountain_wind" },
+    { "name": "ambiance", "type": "string", "value": "outdoor_wind" }
+  ]
+}

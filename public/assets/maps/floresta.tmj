@@ -1,0 +1,79 @@
+{
+  "compressionlevel": -1,
+  "height": 15, "infinite": false,
+  "layers": [
+    {
+      "id": 1, "name": "Chão", "opacity": 1, "type": "tilelayer", "visible": true,
+      "width": 20, "height": 15, "x": 0, "y": 0,
+      "data": [
+        1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,
+        4,5,1,2,3,1,4,5,1,2,3,1,4,5,1,2,3,1,4,5,
+        2,1,5,4,1,2,3,1,5,4,1,2,3,1,5,4,1,2,3,1,
+        3,4,1,5,2,3,1,4,1,5,2,3,1,4,1,5,2,3,1,4,
+        1,2,3,1,5,4,2,1,3,1,5,4,2,1,3,1,5,4,2,1,
+        2,3,1,4,1,5,3,2,1,4,1,5,3,2,1,4,1,5,3,2,
+        1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,
+        4,5,1,2,3,1,4,5,1,2,3,1,4,5,1,2,3,1,4,5,
+        2,1,5,4,1,2,3,1,5,4,1,2,3,1,5,4,1,2,3,1,
+        3,4,1,5,2,3,1,4,1,5,2,3,1,4,1,5,2,3,1,4,
+        1,2,3,1,5,4,2,1,3,1,5,4,2,1,3,1,5,4,2,1,
+        2,3,1,4,1,5,3,2,1,4,1,5,3,2,1,4,1,5,3,2,
+        1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,
+        4,5,1,2,3,1,4,5,1,2,3,1,4,5,1,2,3,1,4,5,
+        2,1,5,4,1,2,3,1,5,4,1,2,3,1,5,4,1,2,3,1
+      ]
+    },
+    {
+      "id": 2, "name": "Árvores", "opacity": 1, "type": "tilelayer", "visible": true,
+      "width": 20, "height": 15, "x": 0, "y": 0,
+      "data": [
+        120,121,122,120,121,122,120,121,122,120,121,122,120,121,122,120,121,122,120,121,
+        123,124,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,123,124,
+        120,0,0,0,0,120,121,0,0,0,0,120,0,0,0,0,121,0,0,120,
+        121,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,121,
+        122,0,120,0,0,0,0,0,0,0,0,0,0,0,0,0,120,0,0,122,
+        123,0,121,0,0,0,0,0,0,0,0,0,0,0,0,0,121,0,0,123,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        122,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,122,
+        120,0,0,0,120,0,0,0,0,0,0,0,0,0,120,0,0,0,0,120,
+        121,0,0,0,121,0,0,0,0,0,0,0,0,0,121,0,0,0,0,121,
+        122,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,122,
+        123,0,0,0,0,0,120,0,0,0,0,120,0,0,0,0,0,0,0,123,
+        123,124,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,123,124,
+        120,121,122,120,121,122,120,121,122,120,121,122,120,121,122,120,121,122,120,121
+      ]
+    },
+    {
+      "id": 3, "name": "Colisão", "opacity": 0.3, "type": "objectgroup", "visible": true,
+      "x": 0, "y": 0,
+      "objects": [
+        { "id": 1, "name": "arvores_borda_topo", "type": "colisao", "x": 0, "y": 0, "width": 320, "height": 32 },
+        { "id": 2, "name": "arvores_borda_base", "type": "colisao", "x": 0, "y": 208, "width": 320, "height": 32 },
+        { "id": 3, "name": "arvores_borda_esq", "type": "colisao", "x": 0, "y": 0, "width": 32, "height": 240 },
+        { "id": 4, "name": "arvores_borda_dir", "type": "colisao", "x": 288, "y": 0, "width": 32, "height": 240 },
+        { "id": 5, "name": "saida_norte", "type": "transicao", "x": 144, "y": 0, "width": 32, "height": 16, "properties": [{"name": "sala_destino","type":"int","value": 2}] },
+        { "id": 6, "name": "saida_sul", "type": "transicao", "x": 144, "y": 224, "width": 32, "height": 16, "properties": [{"name": "sala_destino","type":"int","value": 17}] },
+        { "id": 7, "name": "saida_leste", "type": "transicao", "x": 304, "y": 96, "width": 16, "height": 48, "properties": [{"name": "sala_destino","type":"int","value": 8}] },
+        { "id": 8, "name": "saida_oeste", "type": "transicao", "x": 0, "y": 96, "width": 16, "height": 48, "properties": [{"name": "sala_destino","type":"int","value": 6}] },
+        { "id": 9, "name": "ponto_spawn", "type": "spawn", "x": 152, "y": 120, "width": 16, "height": 16 },
+        { "id": 10, "name": "baú_floresta", "type": "interacao", "x": 80, "y": 80, "width": 16, "height": 16, "properties": [{"name": "tipo","type":"string","value": "bau"}, {"name": "conteudo","type":"string","value": "erva_silvestre,moeda:5"}] }
+      ]
+    }
+  ],
+  "nextlayerid": 4, "nextobjectid": 11,
+  "orientation": "orthogonal", "renderorder": "right-down",
+  "tiledversion": "1.10.2", "tileheight": 16,
+  "tilesets": [
+    { "firstgid": 1, "source": "../assets/tilesets/TX_Tileset_Ground.tsx" },
+    { "firstgid": 120, "source": "../assets/tilesets/TX_Tileset_Nature.tsx" }
+  ],
+  "tilewidth": 16, "type": "map", "version": "1.10", "width": 20,
+  "properties": [
+    { "name": "sala_id", "type": "int", "value": 7 },
+    { "name": "nome", "type": "string", "value": "Floresta Densa" },
+    { "name": "bioma", "type": "string", "value": "floresta" },
+    { "name": "musica", "type": "string", "value": "forest_ambient" },
+    { "name": "ambiance", "type": "string", "value": "outdoor_birds" }
+  ]
+}

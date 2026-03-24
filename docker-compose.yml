@@ -1,0 +1,42 @@
+# docker-compose.yml — APENAS para desenvolvimento local
+# Em produção (Dokploy), o PostgreSQL é um serviço separado configurado no painel
+
+version: "3.9"
+
+services:
+  app:
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://tardoria:tardoria@db:5432/tardoria
+      - JWT_SECRET=dev_secret_troque_em_producao
+      - PORT=4000
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npm run dev
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: tardoria
+      POSTGRES_USER: tardoria
+      POSTGRES_PASSWORD: tardoria
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./src/db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tardoria"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:

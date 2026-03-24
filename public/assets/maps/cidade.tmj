@@ -1,0 +1,83 @@
+{
+  "compressionlevel": -1,
+  "height": 15, "infinite": false,
+  "layers": [
+    {
+      "id": 1, "name": "Chão", "opacity": 1, "type": "tilelayer", "visible": true,
+      "width": 20, "height": 15, "x": 0, "y": 0,
+      "data": [
+        17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,
+        17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,
+        17,17,50,50,50,50,17,17,17,17,17,17,50,50,50,50,17,17,17,17,
+        17,17,50,50,50,50,17,17,17,17,17,17,50,50,50,50,17,17,17,17,
+        17,17,50,50,50,50,17,17,17,17,17,17,50,50,50,50,17,17,17,17,
+        17,17,50,50,50,50,17,17,17,17,17,17,50,50,50,50,17,17,17,17,
+        17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,
+        17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,
+        17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,
+        17,17,50,50,50,50,50,17,17,17,17,50,50,50,50,50,17,17,17,17,
+        17,17,50,50,50,50,50,17,17,17,17,50,50,50,50,50,17,17,17,17,
+        17,17,50,50,50,50,50,17,17,17,17,50,50,50,50,50,17,17,17,17,
+        17,17,50,50,50,50,50,17,17,17,17,50,50,50,50,50,17,17,17,17,
+        17,17,50,50,50,50,50,17,17,17,17,50,50,50,50,50,17,17,17,17,
+        17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17
+      ]
+    },
+    {
+      "id": 2, "name": "Estruturas", "opacity": 1, "type": "tilelayer", "visible": true,
+      "width": 20, "height": 15, "x": 0, "y": 0,
+      "data": [
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,150,151,151,152,0,0,0,0,0,0,150,151,151,152,0,0,0,0,
+        0,0,153,0,0,154,0,0,0,0,0,0,153,0,0,154,0,0,0,0,
+        0,0,153,0,0,154,0,0,0,0,0,0,153,0,0,154,0,0,0,0,
+        0,0,153,0,0,154,0,0,0,0,0,0,153,0,0,154,0,0,0,0,
+        0,0,155,156,156,157,0,0,0,0,0,0,155,156,156,157,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+        0,0,150,151,151,151,152,0,0,0,0,150,151,151,151,152,0,0,0,0,
+        0,0,153,0,0,0,154,0,0,0,0,153,0,0,0,154,0,0,0,0,
+        0,0,153,0,0,0,154,0,0,0,0,153,0,0,0,154,0,0,0,0,
+        0,0,153,0,0,0,154,0,0,0,0,153,0,0,0,154,0,0,0,0,
+        0,0,153,0,0,0,154,0,0,0,0,153,0,0,0,154,0,0,0,0,
+        0,0,155,156,156,156,157,0,0,0,0,155,156,156,156,157,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+      ]
+    },
+    {
+      "id": 3, "name": "Colisão", "opacity": 0.3, "type": "objectgroup", "visible": true,
+      "x": 0, "y": 0,
+      "objects": [
+        { "id": 1, "name": "predio_NO", "type": "colisao", "x": 32, "y": 16, "width": 64, "height": 80 },
+        { "id": 2, "name": "predio_NE", "type": "colisao", "x": 192, "y": 16, "width": 64, "height": 80 },
+        { "id": 3, "name": "predio_SO", "type": "colisao", "x": 32, "y": 128, "width": 80, "height": 96 },
+        { "id": 4, "name": "predio_SE", "type": "colisao", "x": 176, "y": 128, "width": 80, "height": 96 },
+        { "id": 5, "name": "porta_NO", "type": "interacao", "x": 48, "y": 80, "width": 16, "height": 16, "properties": [{"name": "tipo","type":"string","value": "porta"}, {"name": "destino","type":"string","value": "loja_norte"}] },
+        { "id": 6, "name": "porta_NE", "type": "interacao", "x": 224, "y": 80, "width": 16, "height": 16, "properties": [{"name": "tipo","type":"string","value": "porta"}, {"name": "destino","type":"string","value": "loja_nordeste"}] },
+        { "id": 7, "name": "saida_norte", "type": "transicao", "x": 144, "y": 0, "width": 32, "height": 16, "properties": [{"name": "sala_destino","type":"int","value": 6}] },
+        { "id": 8, "name": "saida_sul", "type": "transicao", "x": 144, "y": 224, "width": 32, "height": 16, "properties": [{"name": "sala_destino","type":"int","value": 16}] },
+        { "id": 9, "name": "saida_leste", "type": "transicao", "x": 304, "y": 96, "width": 16, "height": 48, "properties": [{"name": "sala_destino","type":"int","value": 12}] },
+        { "id": 10, "name": "saida_oeste", "type": "transicao", "x": 0, "y": 96, "width": 16, "height": 48, "properties": [{"name": "sala_destino","type":"int","value": 10}] },
+        { "id": 11, "name": "ponto_spawn", "type": "spawn", "x": 152, "y": 112, "width": 16, "height": 16 },
+        { "id": 12, "name": "npc_mercador", "type": "npc", "x": 128, "y": 96, "width": 16, "height": 16, "properties": [{"name": "npc_id","type":"string","value": "mercador"}, {"name": "dialogo","type":"string","value": "Quer comprar algo?"}] }
+      ]
+    }
+  ],
+  "nextlayerid": 4, "nextobjectid": 13,
+  "orientation": "orthogonal", "renderorder": "right-down",
+  "tiledversion": "1.10.2", "tileheight": 16,
+  "tilesets": [
+    { "firstgid": 1, "source": "../assets/tilesets/TX_Tileset_Ground.tsx" },
+    { "firstgid": 33, "source": "../assets/tilesets/TX_Tileset_Wall.tsx" },
+    { "firstgid": 50, "source": "../assets/tilesets/TX_Tileset_Floor.tsx" },
+    { "firstgid": 150, "source": "../assets/tilesets/TX_Tileset_Building.tsx" }
+  ],
+  "tilewidth": 16, "type": "map", "version": "1.10", "width": 20,
+  "properties": [
+    { "name": "sala_id", "type": "int", "value": 11 },
+    { "name": "nome", "type": "string", "value": "Cidade dos Mercadores" },
+    { "name": "bioma", "type": "string", "value": "cidade" },
+    { "name": "musica", "type": "string", "value": "town_theme" },
+    { "name": "ambiance", "type": "string", "value": "outdoor_town" }
+  ]
+}
