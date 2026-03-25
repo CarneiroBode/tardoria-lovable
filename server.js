@@ -19,15 +19,26 @@ const app    = express();
 const server = http.createServer(app);
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve React build (dist/) first, then fallback to public/
+const distPath = path.join(__dirname, 'dist');
+const publicPath = path.join(__dirname, 'public');
+const fs = require('fs');
+
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+} else {
+  app.use(express.static(publicPath));
+}
 app.use('/api/auth', authRouter);
 
 app.get('/health', (_, res) => res.json({ status: 'ok', uptime: process.uptime() }));
 
 // SPA fallback
-app.get('*', (_, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'index.html'))
-);
+const spaIndex = fs.existsSync(distPath)
+  ? path.join(distPath, 'index.html')
+  : path.join(publicPath, 'index.html');
+
+app.get('*', (_, res) => res.sendFile(spaIndex));
 
 // ── Socket.io ────────────────────────────────────────────
 const io = new Server(server, {
