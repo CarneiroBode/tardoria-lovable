@@ -1,3 +1,0 @@
-char_01.png
-char_02.png
-etc.
