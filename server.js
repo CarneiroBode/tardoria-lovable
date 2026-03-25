@@ -34,9 +34,11 @@ app.use('/api/auth', authRouter);
 app.get('/health', (_, res) => res.json({ status: 'ok', uptime: process.uptime() }));
 
 // SPA fallback
-app.get('*', (_, res) =>
-  res.sendFile(path.join(__dirname, 'public', 'index.html'))
-);
+const spaIndex = fs.existsSync(distPath)
+  ? path.join(distPath, 'index.html')
+  : path.join(publicPath, 'index.html');
+
+app.get('*', (_, res) => res.sendFile(spaIndex));
 
 // ── Socket.io ────────────────────────────────────────────
 const io = new Server(server, {
