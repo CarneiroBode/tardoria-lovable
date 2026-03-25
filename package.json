@@ -7,6 +7,7 @@
     "start": "node server.js",
     "dev": "vite",
     "build": "vite build",
+    "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "server": "nodemon server.js",
     "db:migrate": "node src/db/migrate.js"
